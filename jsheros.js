@@ -345,7 +345,7 @@ var heros = [
             "Groot"
         ],
         "win_rate": 47,
-        "hero_role": "brawl"
+        "hero_role": "dive"
     },
     {
         "hero_name": "Loki",

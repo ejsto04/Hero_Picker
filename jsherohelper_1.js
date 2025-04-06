@@ -10,21 +10,8 @@ rand_button.addEventListener("click", function() {
         num = Math.random()*(heros.length-1);
         num = Math.round(num);
     }
-    r_pic.src = "c:\\Users\\elija\\Desktop\\Hero_pics\\"+heros[num].hero_file_name+"_Tile.png";
+    r_pic.src = "Hero_pics\\"+heros[num].hero_file_name+"_Tile.png";
 });
-
-
-// let position = 0;
-// function move() {
-//     position += 2; // Increase position
-//     document.getElementById("rand_hero_pic").style.left = position + "px";
-
-//     if (position < 500) { // Stop at 500px
-//         requestAnimationFrame(move);
-//     }
-// }
-
-// move();
 
 const gen_btn = document.getElementById("main_gen");
 gen_btn.addEventListener("click", function() {
@@ -71,9 +58,11 @@ gen_btn.addEventListener("click", function() {
     if(brawl_count > poke_count && brawl_count > dive_count){
         sug_type = poke;
     } 
-    
-
-    for(let i = 0; i < cur_team_a.length; i++){
+    let a_len = cur_team_a.length;
+    if(user_sel_char){
+        a_len--;
+    }
+    for(let i = 0; i < a_len; i++){
         if(cur_team_a[i] != 0){
             let role = cur_team_a[i].hero_class;
             if(role == "Strategist"){
@@ -176,7 +165,7 @@ function getHero(role, h_class){
     }
 
     let sug_hero = [];
-    for(let i = 0; i < cur_team_a.length; i++){
+    for(let i = 0; i < cur_team_a.length-1; i++){
         if(cur_team_a[i] != 0){
             for(let x = 0; x < cur_team_a[i].teamup.length; x++){
                 for(let p = 0; p < role1.length; p++){
@@ -230,9 +219,10 @@ function getHero(role, h_class){
         reason.insertAdjacentText('beforeend', "This character has a good teamup");
     }
 
-
+    const user_drop = document.getElementById("a_hero_picker_6")
+    user_drop.value = best_pick.hero_name;
     const user_hero = document.getElementById("a_hero_pic_6");
-    user_hero.src = "c:\\Users\\elija\\Desktop\\Hero_pics\\"+best_pick.hero_file_name+"_Tile.png";
+    user_hero.src = "Hero_pics\\"+best_pick.hero_file_name+"_Tile.png";
 }
 
 

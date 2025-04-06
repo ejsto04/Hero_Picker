@@ -66,7 +66,7 @@ for(var x = 0; x < 2; x++)
                     }
                 }
                 if(file_hero != " "){
-                        pic.src = "c:\\Users\\elija\\Desktop\\Hero_pics\\"+file_hero+"_Tile.png";
+                        pic.src = "Hero_pics\\"+file_hero+"_Tile.png";
                 } else {
                     console.log("character not found");
                 }
