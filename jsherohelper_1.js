@@ -1,3 +1,4 @@
+function runHelp(){
 const rand_button = document.getElementById("rand_generate");
 rand_button.addEventListener("click", function() {
     let num = Math.random()*(heros.length-1);
@@ -167,9 +168,9 @@ function getHero(role, h_class){
     let sug_hero = [];
     for(let i = 0; i < cur_team_a.length-1; i++){
         if(cur_team_a[i] != 0){
-            for(let x = 0; x < cur_team_a[i].teamup.length; x++){
+            for(let x = 0; x < teamups.length; x++){
                 for(let p = 0; p < role1.length; p++){
-                    if(cur_team_a[i].teamup[x] == role1[p].hero_name){
+                    if(cur_team_a[i].hero_name == teamups[x].main_hero && teamups[x].side_hero == role1[p].hero_name){
                         sug_hero.push(role1[p]);
                         tup = 1;
                     }
@@ -225,4 +226,4 @@ function getHero(role, h_class){
     user_hero.src = "Hero_pics\\"+best_pick.hero_file_name+"_Tile.png";
 }
 
-
+}

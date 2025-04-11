@@ -1,15 +1,55 @@
-// serves.ts
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { join, extname } from "https://deno.land/std@0.224.0/path/mod.ts";
+import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+// serves.ts
+
+// 
+
+
+console.log("Server running at http://localhost:8000");
+
+const config = JSON.parse(await Deno.readTextFile("config.json"));
+
+const client = new Client({
+    user: config.db.user,
+    password: config.db.password,
+    database: config.db.database,
+    hostname: config.db.hostname,
+    port: config.db.port,
+});
+await client.connect();
 
 console.log("Server running at http://localhost:8000");
 
 serve(async (req) => {
   const url = new URL(req.url);
   const pathname = url.pathname;
-  //console.log(pathname)
-  // console.log("➡ Request:", pathname);
-  // Serve the hero.html file at root
+      
+  if (pathname === "/api/heros_db" && req.method === "GET") {
+    try {
+      const result = await client.queryObject("SELECT * FROM heros_db");
+      //console.log(result.rows);
+      return new Response(JSON.stringify(result.rows), {
+        headers: { "content-type": "application/json" },
+      });
+    } catch (err) {
+      console.error("❌ DB Error:", err);
+      return new Response("Database error", { status: 500 });
+    }
+  }
+  if (pathname === "/api/teamups" && req.method === "GET") {
+    try {
+      const result = await client.queryObject("SELECT * FROM teamups");
+      //console.log(result.rows);
+      return new Response(JSON.stringify(result.rows), {
+        headers: { "content-type": "application/json" },
+      });
+    } catch (err) {
+      console.error("❌ DB Error:", err);
+      return new Response("Database error", { status: 500 });
+    }
+  }
+
   if (pathname === "/") {
     try {
       const html = await Deno.readFile("hero.html");

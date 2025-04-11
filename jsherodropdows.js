@@ -1,5 +1,7 @@
 var cur_team_e = [0,0,0,0,0,0];
 var cur_team_a = [0,0,0,0,0,0];
+function runDrop(){
+
 
 for(var x = 0; x < 2; x++)
     {
@@ -92,7 +94,12 @@ for(var x = 0; x < 2; x++)
     addDrop(dropdown);
     const col = document.getElementById(p+"_hero_col");
     col.appendChild(dropdown);
-    if(i == 0){    
+    if(i == 0){  
+    const fav_reset = document.getElementById("freset_btn");
+        fav_reset.addEventListener("click", function() {
+            localStorage.setItem('favs', '');
+            favs = [];
+        });
     const fav_btn = document.getElementById("fav_btn");
         fav_btn.addEventListener("click", function() {
             let sel_hero = dropdown.value;
@@ -104,7 +111,7 @@ for(var x = 0; x < 2; x++)
                         favs_len = favs.length;
                     }
                     for(let x = 0; x < favs_len; x++){
-                        if(sel_hero == favs[x]){
+                        if(sel_hero == favs[x].hero_name){
                             dup = true;
                         }
                     }
@@ -117,6 +124,11 @@ for(var x = 0; x < 2; x++)
             }
         });
     } else {
+        const les_reset = document.getElementById("lreset_btn");
+        les_reset.addEventListener("click", function() {
+            localStorage.setItem('least', '');
+            least = [];
+        });
         const les_btn = document.getElementById("les_btn");
         les_btn.addEventListener("click", function() {
             let sel_hero = dropdown.value;
@@ -140,5 +152,6 @@ for(var x = 0; x < 2; x++)
                 }
             }
         });
+        }
     }
-    }
+}
