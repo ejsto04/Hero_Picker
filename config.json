@@ -1,9 +1,0 @@
-{
-    "db": {
-      "user": "ejsto",
-      "password": "duke1065",
-      "database": "marvel_rivals",
-      "hostname": "localhost",
-      "port": 5432
-    }
-  }
